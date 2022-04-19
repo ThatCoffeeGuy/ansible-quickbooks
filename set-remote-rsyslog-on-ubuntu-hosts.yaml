@@ -1,0 +1,35 @@
+---
+  - name: "Reading rsyslog configuration"
+    hosts: ubuntu
+
+    tasks:
+      - name: "Check if rsyslog already configured: Validate if string present"
+        become: yes
+        become_user: root
+        tags: rsyslog
+        lineinfile:
+          path: /etc/rsyslog.conf
+          line: "*.* @192.168.0.129:1514;RSYSLOG_SyslogProtocol23Format"
+          state: present
+          backup: yes
+        check_mode: yes
+        register: rsyslogpresent
+
+      - name: "Add *.* @192.168.0.129:1514;RSYSLOG_SyslogProtocol23Format to /etc/rsyslog.conf"
+        become: yes
+        become_user: root
+        tags: rsyslog
+        lineinfile:
+          path: /etc/rsyslog.conf
+          line: "*.* @192.168.0.129:1514;RSYSLOG_SyslogProtocol23Format"
+          state: present
+          backup: yes
+        register: rsyslogadded
+
+
+      - name: "Reload service rsyslog, in all cases"
+        become: yes
+        become_user: root
+        ansible.builtin.systemd:
+          name: rsyslog.service
+          state: restarted

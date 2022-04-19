@@ -1,0 +1,27 @@
+---
+- name: Update APT cache and install basic tools
+  gather_facts: false
+  hosts: ubuntu
+  tasks:
+
+  - name: Update APT cache
+    become: yes
+    become_user: root
+    apt:
+      update_cache: yes
+
+
+  - name: Install htop, iftop, iotop, tmux, screen, net-tools, ncdu, mc
+    become: yes
+    become_user: root
+    apt:
+      pkg:
+      - htop
+      - iftop
+      - iotop
+      - tmux
+      - screen
+      - net-tools
+      - ncdu
+      - mc
+
