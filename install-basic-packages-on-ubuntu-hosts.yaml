@@ -11,7 +11,7 @@
       update_cache: yes
 
 
-  - name: Install htop, iftop, iotop, tmux, screen, net-tools, ncdu, mc
+  - name: Install htop, iftop, iotop, tmux, screen, net-tools, ncdu, mc, fail2ban
     become: yes
     become_user: root
     apt:
@@ -24,4 +24,4 @@
       - net-tools
       - ncdu
       - mc
-
+      - fail2ban
