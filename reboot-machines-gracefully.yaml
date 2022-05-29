@@ -1,0 +1,10 @@
+---
+- name: Reboot machines gracefully
+  gather_facts: false
+  hosts: ubuntu
+  tasks:
+
+  - name: Unconditionally reboot the machine with all defaults
+    become: yes
+    become_user: root
+    reboot:

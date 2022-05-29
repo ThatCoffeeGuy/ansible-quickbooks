@@ -1,0 +1,13 @@
+---
+- name: Disable SSH password authentication
+  gather_facts: false
+  hosts: ubuntus
+  tasks:
+
+  - name: Disable SSH password authentication by changing PasswordAuthentication to no in /etc/ssh/sshd_conf
+    become: yes
+    become_user: root
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#PasswordAuthentication yes'
+      line: 'PasswordAuthentication no'

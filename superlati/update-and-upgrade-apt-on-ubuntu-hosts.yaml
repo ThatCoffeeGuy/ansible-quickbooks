@@ -1,0 +1,13 @@
+---
+- name: Update and upgrade APT packages on ubuntu hosts
+  gather_facts: false
+  hosts: ubuntus
+  tasks:
+
+  - name: Update all packages to their latest version
+    become: yes
+    become_user: root
+    apt:
+      name: "*"
+      state: latest
+      update_cache: yes
